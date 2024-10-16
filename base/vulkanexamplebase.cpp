@@ -123,8 +123,8 @@ VkResult VulkanExampleBase::createInstance()
 	}
 	// TODO 1.1
 	if (instanceExtensions.size() > 0) {
-		instanceCreateInfo.enabledExtensionCount = (uint32_t)instanceExtensions.size();
-		instanceCreateInfo.ppEnabledExtensionNames = instanceExtensions.data();
+		instanceCreateInfo.enabledExtensionCount = (uint32_t)??size of enabled extension??;
+		instanceCreateInfo.ppEnabledExtensionNames = ??address of extension names??;
 	}
 
 	// The VK_LAYER_KHRONOS_validation contains all current validation functionality.
@@ -145,14 +145,14 @@ VkResult VulkanExampleBase::createInstance()
 		}
 		// TODO 1.1
 		if (validationLayerPresent) {
-			instanceCreateInfo.ppEnabledLayerNames = &validationLayerName;
-			instanceCreateInfo.enabledLayerCount = 1;
+			instanceCreateInfo.ppEnabledLayerNames = ??address of the layer name??;
+			instanceCreateInfo.enabledLayerCount = ??;
 		} else {
 			std::cerr << "Validation layer VK_LAYER_KHRONOS_validation not present, validation is disabled";
 		}
 	}
 	// TODO 1.1
-	VkResult result = vkCreateInstance(&instanceCreateInfo, nullptr, &instance);
+	VkResult result = vkCreateInstance(??, nullptr, &instance);
 
 	// If the debug utils extension is present we set up debug functions, so samples can label objects for debugging
 	if (std::find(supportedInstanceExtensions.begin(), supportedInstanceExtensions.end(), VK_EXT_DEBUG_UTILS_EXTENSION_NAME) != supportedInstanceExtensions.end()) {
@@ -744,7 +744,7 @@ void VulkanExampleBase::prepareFrame()
 {
 	// TODO 6.2.1 signal semaphores.presentComplete when the next image is got from the swapchain
 	// Acquire the next image from the swap chain
-	VkResult result = swapChain.acquireNextImage(semaphores.presentComplete, &currentBuffer);
+	VkResult result = swapChain.acquireNextImage(??, &currentBuffer);
 	// Recreate the swapchain if it's no longer compatible with the surface (OUT_OF_DATE)
 	// SRS - If no longer optimal (VK_SUBOPTIMAL_KHR), wait until submitFrame() in case number of swapchain images will change on resize
 	if ((result == VK_ERROR_OUT_OF_DATE_KHR) || (result == VK_SUBOPTIMAL_KHR)) {
@@ -1045,11 +1045,7 @@ bool VulkanExampleBase::initVulkan()
 	{
 		VkPhysicalDeviceProperties deviceProperties;
 		vkGetPhysicalDeviceProperties(physicalDevices[i], &deviceProperties);
-		if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
-		{
-			selectedDevice = i;
-			break;
-		}
+		// query deviceProperties.deviceType check for it
 	}
 #endif
 
@@ -3105,21 +3101,21 @@ void VulkanExampleBase::setupRenderPass()
 	// Color attachment
 	attachments[0].format = swapChain.colorFormat;
 	attachments[0].samples = VK_SAMPLE_COUNT_1_BIT;
-	attachments[0].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-	attachments[0].storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+	attachments[0].loadOp = ??;
+	attachments[0].storeOp = ??;
 	attachments[0].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
 	attachments[0].stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-	attachments[0].initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-	attachments[0].finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+	attachments[0].initialLayout = ??;
+	attachments[0].finalLayout = ??;
 	// Depth attachment
 	attachments[1].format = depthFormat;
 	attachments[1].samples = VK_SAMPLE_COUNT_1_BIT;
-	attachments[1].loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
-	attachments[1].storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+	attachments[1].loadOp = ??;
+	attachments[1].storeOp = ??;
 	attachments[1].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
 	attachments[1].stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
-	attachments[1].initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-	attachments[1].finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+	attachments[1].initialLayout = ??;
+	attachments[1].finalLayout = ??;
 
 	VkAttachmentReference colorReference = {};
 	colorReference.attachment = 0;

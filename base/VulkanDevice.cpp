@@ -126,17 +126,14 @@ namespace vks
 	*/
 	uint32_t VulkanDevice::getQueueFamilyIndex(VkQueueFlags queueFlags) const
 	{
-		// TODO 1.4 Get dedicated compute queue here
+		// TODO 1.4.1 Get dedicated compute queue here
 		// Dedicated queue for compute
 		// Try to find a queue family index that supports compute but not graphics
 		if ((queueFlags & VK_QUEUE_COMPUTE_BIT) == queueFlags)
 		{
 			for (uint32_t i = 0; i < static_cast<uint32_t>(queueFamilyProperties.size()); i++)
 			{
-				if ((queueFamilyProperties[i].queueFlags & VK_QUEUE_COMPUTE_BIT) && ((queueFamilyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) == 0))
-				{
-					return i;
-				}
+				// if current queueFamilyProperties' queueflags contains compute bit and does not contains graphics bit then return it
 			}
 		}
 
@@ -210,11 +207,11 @@ namespace vks
 			queueFamilyIndices.compute = getQueueFamilyIndex(VK_QUEUE_COMPUTE_BIT);
 			if (queueFamilyIndices.compute != queueFamilyIndices.graphics)
 			{
-				// TODO 1.4
+				// TODO 1.4.2
 				// If compute family index differs, we need an additional queue create info for the compute queue
 				VkDeviceQueueCreateInfo queueInfo{};
 				queueInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-				queueInfo.queueFamilyIndex = queueFamilyIndices.compute;
+				queueInfo.queueFamilyIndex = ??;
 				queueInfo.queueCount = 1;
 				queueInfo.pQueuePriorities = &defaultQueuePriority;
 				queueCreateInfos.push_back(queueInfo);
